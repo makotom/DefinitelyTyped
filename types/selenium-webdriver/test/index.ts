@@ -574,15 +574,19 @@ function TestWebDriverWindow() {
         build();
 
     let window: webdriver.Window = new webdriver.Window(driver);
-    let locationPromise: webdriver.promise.Promise<webdriver.ILocation>;
-    let sizePromise: webdriver.promise.Promise<webdriver.ISize>;
+    let rectPromise: webdriver.promise.Promise<{ height: number, width: number, x: number, y: number }>;
     let voidPromise: webdriver.promise.Promise<void>;
 
-    locationPromise = window.getPosition();
-    sizePromise = window.getSize();
+    rectPromise = window.getRect();
+    rectPromise = window.setRect({
+        height: 12,
+        width: 34,
+        x: 56,
+        y: 78
+    });
+    voidPromise = window.fullscreen();
     voidPromise = window.maximize();
-    voidPromise = window.setPosition(12, 34);
-    voidPromise = window.setSize(12, 34);
+    voidPromise = window.minimize();
 }
 
 declare const sessionPromise: webdriver.promise.Promise<webdriver.Session>;

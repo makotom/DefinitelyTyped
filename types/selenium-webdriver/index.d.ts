@@ -3310,40 +3310,18 @@ export class Window {
   // region Methods
 
   /**
-   * Retrieves the window's current position, relative to the top left corner of
-   * the screen.
-   * @return {!promise.Promise} A promise that will be resolved with the
-   *     window's position in the form of a {x:number, y:number} object literal.
-   */
-  getPosition(): promise.Promise<ILocation>;
-
-  /**
-   * Repositions the current window.
-   * @param {number} x The desired horizontal position, relative to the left side
-   *     of the screen.
-   * @param {number} y The desired vertical position, relative to the top of the
-   *     of the screen.
+   * Invokes the "full screen" operation on the current window.
    * @return {!promise.Promise} A promise that will be resolved when the
    *     command has completed.
    */
-  setPosition(x: number, y: number): promise.Promise<void>;
+  fullscreen(): promise.Promise<void>;
 
   /**
-   * Retrieves the window's current size.
-   * @return {!promise.Promise} A promise that will be resolved with the
-   *     window's size in the form of a {width:number, height:number} object
-   *     literal.
+   * Retrieves the a rect describing the current top-level window's size and position.
+   * @return {!promise.Promise} A promise that will resolve to the window rect
+   *     of the current window.
    */
-  getSize(): promise.Promise<ISize>;
-
-  /**
-   * Resizes the current window.
-   * @param {number} width The desired window width.
-   * @param {number} height The desired window height.
-   * @return {!promise.Promise} A promise that will be resolved when the
-   *     command has completed.
-   */
-  setSize(width: number, height: number): promise.Promise<void>;
+  getRect(): promise.Promise<{ height: number, width: number, x: number, y: number }>
 
   /**
    * Maximizes the current window.
@@ -3351,6 +3329,31 @@ export class Window {
    *     command has completed.
    */
   maximize(): promise.Promise<void>;
+
+  /**
+   * Minimizes the current window.
+   * @return {!promise.Promise} A promise that will be resolved when the
+   *     command has completed.
+   */
+  minimize(): promise.Promise<void>;
+
+  /**
+   * Sets the current top-level window's size and position.
+   * @param {
+   *   {
+   *     height: (number|undefined),
+   *     width: (number|undefined),
+   *     x: (number|undefined),
+   *     y: (number|undefined)
+   *   }
+   * } options The desired window size and position.
+   */
+  setRect(options: {
+    height: (number | undefined),
+    width: (number | undefined),
+    x: (number | undefined),
+    y: (number | undefined)
+  }): promise.Promise<{ height: number, width: number, x: number, y: number }>
 
   // endregion
 }
